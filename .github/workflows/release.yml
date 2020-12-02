@@ -20,14 +20,14 @@ jobs:
         uses: mavrosxristoforos/get-xml-info@1.0
         with:
           xml-file: ${{ github.event.repository.name }}.xml
-          xpath: /root/versions/version[num='$TAG_VALUE']/compatibility
+          xpath: /root/glpi_version
       - name: Build project # This would actually build your project, using zip for an example artifact
         id: build_
         env:
             GITHUB_NAME: ${{ github.event.repository.name }}
             
            
-        run: rm -rf $GITHUB_NAME.xml tools wiki screenshots test .git .github ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png;cd ..; ls -al; tar -zcvf glpi-$GITHUB_NAME-${GITHUB_REF/refs\/tags\//}.tar.gz $GITHUB_NAME;ls -al;echo ::set-output name=tag::${GITHUB_REF/refs\/tags\//};echo ${{ steps.getxml.outputs.info }};
+        run: apt-get install xml-twig-tools;echo ::set-output name=version_glpi::$(xml_grep '/root/versions/version[num="${GITHUB_REF/refs\/tags\//}"]/compatibility' $GITHUB_NAME.xml); rm -rf $GITHUB_NAME.xml tools wiki screenshots test .git .github ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png;cd ..; tar -zcvf glpi-$GITHUB_NAME-${GITHUB_REF/refs\/tags\//}.tar.gz $GITHUB_NAME;ls -al;echo ::set-output name=tag::${GITHUB_REF/refs\/tags\//};echo ${{ steps.getxml.outputs.info }};
        # run: rm -rf $GITHUB_NAME.xml tools wiki screenshots test ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png; tar -zcvf glpi-$GITHUB_NAME-$GITHUB_TAG.tar.gz $GITHUB_NAME
       - name: Create Release
         id: create_release
@@ -36,7 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: GLPI ${{ steps.getxml.outputs.info }}  Version ${{ github.ref }} disponible / available
+          release_name: GLPI ${{ steps.build_.outputs.version_glpi }}  Version ${{ github.ref }} disponible / available
           draft: false
           prerelease: true
       - name: Upload Release Asset
