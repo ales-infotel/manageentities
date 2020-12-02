@@ -20,7 +20,7 @@ jobs:
             GITHUB_NAME: ${{ github.event.repository.name }}
             GITHUB_TAG: ${{ github.event.release.tag_name }}
            
-        run: rm -rf $GITHUB_NAME.xml tools wiki screenshots test ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png;cd ..; ls -al; tar -zcvf glpi-$GITHUB_NAME-$GITHUB_TAG.tar.gz $GITHUB_NAME;ls -al;echo ::set-output name=tag::$GITHUB_TAG
+        run: rm -rf $GITHUB_NAME.xml tools wiki screenshots test ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png;cd ..; ls -al; tar -zcvf glpi-$GITHUB_NAME-$GITHUB_TAG.tar.gz $GITHUB_NAME;ls -al;echo ::set-output name=tag::"$GITHUB_TAG"
        # run: rm -rf $GITHUB_NAME.xml tools wiki screenshots test ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png; tar -zcvf glpi-$GITHUB_NAME-$GITHUB_TAG.tar.gz $GITHUB_NAME
       - name: Create Release
         id: create_release
