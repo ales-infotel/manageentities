@@ -7,7 +7,7 @@ on:
 
 name: Create release with tag
 env:
- GITHUB_TAG: ${{ github.event.release.tag_name }}
+  GITHUB_TAG: ${{ github.event.release.tag_name }}
 jobs:
   build:
     name: Upload Release Asset
@@ -18,6 +18,7 @@ jobs:
       - name: Build project # This would actually build your project, using zip for an example artifact
         env:
             GITHUB_NAME: ${{ github.event.repository.name }}
+            
            
         run: rm -rf $GITHUB_NAME.xml tools wiki screenshots test ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png;cd ..; ls -al; tar -zcvf glpi-$GITHUB_NAME-$GITHUB_TAG.tar.gz $GITHUB_NAME
        # run: rm -rf $GITHUB_NAME.xml tools wiki screenshots test ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png; tar -zcvf glpi-$GITHUB_NAME-$GITHUB_TAG.tar.gz $GITHUB_NAME
@@ -39,7 +40,7 @@ jobs:
           GITHUB_NAME: ${{ github.event.repository.name }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./glpi-${{ github.event.repository.name }}-$GITHUB_TAG.tar.gz
-          asset_name: glpi-${{ github.event.repository.name }}-$GITHUB_TAG.tar.gz
+          asset_path: ./glpi-${{ github.event.repository.name }}-${{ GITHUB_TAG }}.tar.gz
+          asset_name: glpi-${{ github.event.repository.name }}-${{ GITHUB_TAG }}.tar.gz
           asset_content_type: application/zip
   
