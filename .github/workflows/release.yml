@@ -15,9 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build project # This would actually build your project, using zip for an example artifact
-        id: build_
-        outputs:
-          tag: ${{ github.event.release.tag_name }}
         env:
             GITHUB_NAME: ${{ github.event.repository.name }}
             GITHUB_TAG: ${{ github.event.release.tag_name }}
