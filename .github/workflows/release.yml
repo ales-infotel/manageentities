@@ -22,7 +22,7 @@ jobs:
             GITHUB_NAME: ${{ github.event.repository.name }}
             GITHUB_TAG: ${{ github.event.release.tag_name }}
            
-        run: rm -rf $GITHUB_NAME.xml tools wiki screenshots test ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png;cd ..; ls -al; tar -zcvf glpi-$GITHUB_NAME-$GITHUB_TAG.tar.gz $GITHUB_NAME;ls -al;
+        run: rm -rf $GITHUB_NAME.xml tools wiki screenshots test ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png;cd ..; ls -al; tar -zcvf glpi-$GITHUB_NAME-$GITHUB_TAG.tar.gz $GITHUB_NAME;ls -al;echo "$tag=yellow" >> $GITHUB_ENV
        # run: rm -rf $GITHUB_NAME.xml tools wiki screenshots test ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png; tar -zcvf glpi-$GITHUB_NAME-$GITHUB_TAG.tar.gz $GITHUB_NAME
       - name: Create Release
         id: create_release
@@ -42,7 +42,7 @@ jobs:
           GITHUB_NAME: ${{ github.event.repository.name }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./glpi-${{ github.event.repository.name }}-${{ steps.build_.outputs.tag }}.tar.gz
-          asset_name: glpi-${{ github.event.repository.name }}-${{ steps.build_.outputs.tag }}.tar.gz
+          asset_path: ./glpi-${{ github.event.repository.name }}-${{ tag }}.tar.gz
+          asset_name: glpi-${{ github.event.repository.name }}-${{ tag }}.tar.gz
           asset_content_type: application/zip
   
