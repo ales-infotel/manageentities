@@ -19,7 +19,7 @@ jobs:
         uses: mavrosxristoforos/get-xml-info@1.0
         with:
           xml-file: '${{ github.event.repository.name }}.xml'
-          xpath: '/root/versions/version[num=${GITHUB_REF/refs\/tags\//}]/compatibility'
+          xpath: '/root/versions/version[num='${GITHUB_REF/refs\/tags\//}']/compatibility'
       - name: Build project # This would actually build your project, using zip for an example artifact
         id: build_
         env:
