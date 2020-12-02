@@ -23,7 +23,7 @@
    <glpi_version>9.5</glpi_version>
    <versions>
    <version>
-         <num>4.2.4</num>
+         <num>4.2.5</num>
          <compatibility>9.5</compatibility>
       </version>
       <version>

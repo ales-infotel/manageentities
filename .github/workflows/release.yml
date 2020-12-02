@@ -27,7 +27,7 @@ jobs:
             GITHUB_NAME: ${{ github.event.repository.name }}
             
            
-        run: apt-get install xml-twig-tools;echo ::set-output name=version_glpi::$(xml_grep '/root/versions/version[num="${GITHUB_REF/refs\/tags\//}"]/compatibility' $GITHUB_NAME.xml); rm -rf $GITHUB_NAME.xml tools wiki screenshots test .git .github ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png;cd ..; tar -zcvf glpi-$GITHUB_NAME-${GITHUB_REF/refs\/tags\//}.tar.gz $GITHUB_NAME;ls -al;echo ::set-output name=tag::${GITHUB_REF/refs\/tags\//};echo ${{ steps.getxml.outputs.info }};
+        run: sudo apt-get install xml-twig-tools;echo ::set-output name=version_glpi::$(xml_grep '/root/versions/version[num="${GITHUB_REF/refs\/tags\//}"]/compatibility' $GITHUB_NAME.xml); rm -rf $GITHUB_NAME.xml tools wiki screenshots test .git .github ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png;cd ..; tar -zcvf glpi-$GITHUB_NAME-${GITHUB_REF/refs\/tags\//}.tar.gz $GITHUB_NAME;ls -al;echo ::set-output name=tag::${GITHUB_REF/refs\/tags\//};echo ${{ steps.getxml.outputs.info }};
        # run: rm -rf $GITHUB_NAME.xml tools wiki screenshots test ISSUE_TEMPLATE.md TODO.txt $GITHUB_NAME.png; tar -zcvf glpi-$GITHUB_NAME-$GITHUB_TAG.tar.gz $GITHUB_NAME
       - name: Create Release
         id: create_release
