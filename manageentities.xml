@@ -22,7 +22,11 @@
    </authors>
    <glpi_version>9.5</glpi_version>
    <versions>
-   <version>
+	  <version>
+         <num>4.2.22</num>
+         <compatibility>9.5</compatibility>
+      </version>
+	  <version>
          <num>4.2.21</num>
          <compatibility>9.5</compatibility>
       </version>
