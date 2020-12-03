@@ -32,7 +32,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: | 
                     GLPI ${{ steps.build_.outputs.version_glpi }} : Version ${{ github.ref }} disponible / available
-          body : Version ${{ github.ref }} released for GLPI ${{ steps.build_.outputs.version_glpi }}
+          body : Version ${{ steps.build_.outputs.tag }} released for GLPI ${{ steps.build_.outputs.version_glpi }}
           draft: false
           prerelease: true
       - name: Upload Release Asset
