@@ -20,8 +20,11 @@
       <author>Xavier Caillaud</author>
       <author>Infotel</author>
    </authors>
-   <glpi_version>9.5</glpi_version>
    <versions>
+	  <version>
+         <num>4.2.23</num>
+         <compatibility>9.5</compatibility>
+      </version>
 	  <version>
          <num>4.2.22</num>
          <compatibility>9.5</compatibility>
